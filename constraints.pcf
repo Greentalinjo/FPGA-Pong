@@ -1,0 +1,16 @@
+#> PMOD 1
+set_io --warn-no-port button_up_1 10
+set_io --warn-no-port button_down_1 6
+set_io --warn-no-port button_up_2 3
+set_io --warn-no-port button_down_2 48
+
+#> PMOD 2
+set_io --warn-no-port hsync 46
+set_io --warn-no-port vsync 44
+set_io --warn-no-port red   42
+set_io --warn-no-port green 37
+set_io --warn-no-port blue  36
+
+#> PMOD 4 | Switches
+set_io --warn-no-port rst 21
+
