@@ -5,14 +5,14 @@ PACKAGE = sg48
 
 # Verilog source files
 VERILOG_SOURCES = \
-    module_domain_constant_handshake.sv \
-    game_constants_pkg.sv \
-    module_game_clock_generator.sv \
-    module_button_debouncer_single_state.sv \
-    module_game_controller.sv \
-    module_graphics_driver.sv \
-    module_paddle.sv \
-    pong_game_top.sv
+    src/module_domain_constant_handshake.sv \
+    src/game_constants_pkg.sv \
+    src/module_game_clock_generator.sv \
+    src/module_button_debouncer_single_state.sv \
+    src/module_game_controller.sv \
+    src/module_graphics_driver.sv \
+    src/module_paddle.sv \
+    src/pong_game_top.sv
 
 # Constraint file
 PCF_FILE = constraints.pcf
