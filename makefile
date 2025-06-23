@@ -41,18 +41,14 @@ $(JSON_FILE): $(VERILOG_SOURCES) | $(BUILD_DIR)
 
 # Place & route
 $(ASC_FILE): $(JSON_FILE) $(PCF_FILE)
-	$(NEXTPNR) --$(DEVICE) --package $(PACKAGE) --pcf $(PCF_FILE) --json $(JSON_FILE) --asc $(ASC_FILE) --seed 1554158762
+	$(NEXTPNR) --$(DEVICE) --package $(PACKAGE) --pcf $(PCF_FILE) --json $(JSON_FILE) --asc $(ASC_FILE) --seed 598700686
 
 # Bitstream generation
 $(BIN_FILE): $(ASC_FILE)
 	$(ICEPACK) $(ASC_FILE) $(BIN_FILE)
 
-# Flash to FPGA
-flash: $(BIN_FILE)
-	$(ICEPROG) $(BIN_FILE)
-
 # Clean build artifacts
 clean:
 	rm -rf $(BUILD_DIR)
 
-.PHONY: all flash clean
+.PHONY: all clean
