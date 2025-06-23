@@ -29,6 +29,7 @@ module game_clock_generator (
       .PLLOUTCORE(fast_clock_out)
   );
 
+  // Generate a 10kHz clock using the internal low frequency oscillator.
   SB_LFOSC lfosc_inst (
       .CLKLFEN(1'b1),
       .CLKLFPU(1'b1),
