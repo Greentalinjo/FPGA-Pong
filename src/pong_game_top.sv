@@ -1,15 +1,17 @@
+`include "game_constants_pkg.svh"
+
 module pong_game_top #(
-    parameter int GAME_CONTROLLER_CLOCK_RATE = 10000,  // 10 kHz clock.
-    parameter int BUTTON_BOUNCE_DURATION_IN_SECONDS = 0.02,  // 20 ms bounce time.
-    parameter int TOP_TO_BOTTOM_PADDLE_SPEED_IN_SECONDS = 4,
-    parameter int POSITION_CHANGE_FREQ_IN_CLOCKS = GAME_CONTROLLER_CLOCK_RATE * TOP_TO_BOTTOM_PADDLE_SPEED_IN_SECONDS,
-    parameter int DEBOUNCE_WIDTH_IN_CLOCKS       = GAME_CONTROLLER_CLOCK_RATE * BUTTON_BOUNCE_DURATION_IN_SECONDS,
-    parameter int TOTAL_WIDTH = 640,
-    parameter int TOTAL_HEIGHT = 480,
-    parameter int PADDLE_DISTANCE_FROM_EDGE = 40,
-    parameter int PADDLE_HEIGHT = 100,
-    parameter int PADDLE_WIDTH = 15,
-    parameter int BALL_SIDE_SIZE = 24
+    parameter int GAME_CONTROLLER_CLOCK_RATE = GAME_CONTROLLER_CLOCK_RATE,
+    parameter int BUTTON_BOUNCE_DURATION_IN_SECONDS = BUTTON_BOUNCE_DURATION_IN_SECONDS,  // 20 ms bounce time.
+    parameter int TOP_TO_BOTTOM_PADDLE_SPEED_IN_SECONDS = TOP_TO_BOTTOM_PADDLE_SPEED_IN_SECONDS,
+    parameter int POSITION_CHANGE_FREQ_IN_CLOCKS = POSITION_CHANGE_FREQ_IN_CLOCKS,
+    parameter int DEBOUNCE_WIDTH_IN_CLOCKS       = DEBOUNCE_WIDTH_IN_CLOCKS,
+    parameter int TOTAL_WIDTH = TOTAL_WIDTH,
+    parameter int TOTAL_HEIGHT = TOTAL_HEIGHT,
+    parameter int PADDLE_DISTANCE_FROM_EDGE = PADDLE_DISTANCE_FROM_EDGE,
+    parameter int PADDLE_HEIGHT = PADDLE_HEIGHT,
+    parameter int PADDLE_WIDTH = PADDLE_WIDTH,
+    parameter int BALL_SIDE_SIZE = BALL_SIDE_SIZE
 ) (
     input logic rst,
 

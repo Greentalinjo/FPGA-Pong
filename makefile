@@ -6,7 +6,6 @@ PACKAGE = sg48
 # Verilog source files
 VERILOG_SOURCES = \
     src/module_domain_constant_handshake.sv \
-    src/game_constants_pkg.sv \
     src/module_game_clock_generator.sv \
     src/module_button_debouncer_single_state.sv \
     src/module_game_controller.sv \
