@@ -16,4 +16,4 @@ Main features:
 
 The following diagram illustrates the core architecture of the system:
 
-![Logic Architecture](images/Pong Game.jpg)
+![Logic Architecture](./images/Pong Game.jpg)
