@@ -47,3 +47,17 @@ It ensures safe synchronization of signals across asynchronous clock boundaries 
 The graphics driver module generates the VGA-compatible video signals (hsync, vsync, and RGB color outputs) needed to display game elements on a 640x480 screen.  
 It samples the current positions of these elements and uses internal horizontal and vertical counters to track the pixel being drawn. Based on these coordinates, it determines whether the current pixel is part of a paddle or ball and outputs the appropriate RGB color (white) or black background.  
 The module follows standard VGA timing conventions and synchronizes the visual updates with the VGA refresh cycle.
+
+## 🛠️ Target Hardware and Setup Requirements
+
+This project was developed on the IceSugar v1.5 FPGA development board. To run the project successfully on this board, a few additional hardware components are required for input and video output functionality.  
+You will need: 
+* 4 x push buttons for player control, each connected with a 10kΩ pull-down resistor to ensure stable input readings. 
+* For VGA output, the RGB lines from the FPGA must be adapted using 330Ω resistors to safely reduce the 3.3V output to approximately 0.61V, which is within the acceptable range for VGA signaling. 
+* Additionally, a VGA breakout connector is recommended for easy connection between the board and a standard VGA monitor.
+
+### 🔌 IO Pin Assignments
+
+**PMOD 1** is used to connect four physical push buttons, mapped to button_up_1, button_down_1, button_up_2, and button_down_2.  
+**PMOD 2** handles VGA output signals, including hsync, vsync, and RGB color lines (red, green, blue).  
+**PMOD 4** includes a reset signal (rst) connected to a switch, allowing the game to be restarted.
