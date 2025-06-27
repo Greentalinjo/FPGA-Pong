@@ -10,7 +10,7 @@ Main features:
 * ⏰ Multiple clock domains.
 * 🌉 Safe clock domain crossing logic.
 
-## ⚙️ Logic architecture
+## Logic architecture
 
 The following diagram illustrates the core architecture of the system:
 
