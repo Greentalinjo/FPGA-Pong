@@ -24,16 +24,16 @@ module graphics_driver #(
     output logic blue_s
 );
 
-  localparam int X_ACTIVE_IN_CLOCKS = 640;
-  localparam int X_FRONT_IN_CLOCKS = 16;
-  localparam int X_PULSE_IN_CLOCKS = 96;
-  localparam int X_BACK_IN_CLOCKS = 48;
+  localparam int X_ACTIVE_IN_CLOCKS  = 640;
+  localparam int X_FRONT_IN_CLOCKS   = 16;
+  localparam int X_PULSE_IN_CLOCKS   = 96;
+  localparam int X_BACK_IN_CLOCKS    = 48;
   localparam int TOTAL_X             = X_ACTIVE_IN_CLOCKS + X_FRONT_IN_CLOCKS + X_PULSE_IN_CLOCKS + X_BACK_IN_CLOCKS;
 
-  localparam int Y_ACTIVE_IN_LINES = 480;
-  localparam int Y_FRONT_IN_LINES = 10;
-  localparam int Y_PULSE_IN_LINES = 2;
-  localparam int Y_BACK_IN_LINES = 33;
+  localparam int Y_ACTIVE_IN_LINES   = 480;
+  localparam int Y_FRONT_IN_LINES    = 10;
+  localparam int Y_PULSE_IN_LINES    = 2;
+  localparam int Y_BACK_IN_LINES     = 33;
   localparam int TOTAL_Y             = Y_ACTIVE_IN_LINES + Y_FRONT_IN_LINES + Y_PULSE_IN_LINES + Y_BACK_IN_LINES;
 
   localparam int VGA_X_COUNTER_SIZE = $clog2(TOTAL_X);
