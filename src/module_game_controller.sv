@@ -11,7 +11,8 @@ module game_controller #(
     parameter int PADDLE_HEIGHT                 ,
     parameter int PADDLE_WIDTH                  ,
     parameter int BALL_SIDE_SIZE                ,
-    parameter int BALL_OFFSET_RANGE             
+    parameter int BALL_OFFSET_RANGE             ,
+    parameter int BORDER_PIXEL_WIDTH
 ) (
     input logic clk,
     input logic rst,
@@ -109,9 +110,9 @@ module game_controller #(
     next_height_paddle_1 = internal_height_paddle_1;
     next_height_paddle_2 = internal_height_paddle_2;
     // If we did not reach the edges, change position according to paddle movement logic.
-    if ((internal_height_paddle_1 + extended_position_change_1 != TOTAL_HEIGHT - PADDLE_HEIGHT) && (internal_height_paddle_1 + extended_position_change_1 != $bits(internal_height_paddle_1)'(b0)))
+    if ((internal_height_paddle_1 + extended_position_change_1 != TOTAL_HEIGHT - PADDLE_HEIGHT - BORDER_PIXEL_WIDTH) && (internal_height_paddle_1 + extended_position_change_1 != $bits(internal_height_paddle_1)'(BORDER_PIXEL_WIDTH)))
       next_height_paddle_1 = internal_height_paddle_1 + extended_position_change_1;
-    if ((internal_height_paddle_2 + extended_position_change_2 != TOTAL_HEIGHT - PADDLE_HEIGHT) && (internal_height_paddle_2 + extended_position_change_2 != $bits(internal_height_paddle_1)'(b0)))
+    if ((internal_height_paddle_2 + extended_position_change_2 != TOTAL_HEIGHT - PADDLE_HEIGHT - BORDER_PIXEL_WIDTH) && (internal_height_paddle_2 + extended_position_change_2 != $bits(internal_height_paddle_1)'(BORDER_PIXEL_WIDTH)))
       next_height_paddle_2 = internal_height_paddle_2 + extended_position_change_2;
   end
 
@@ -162,7 +163,7 @@ module game_controller #(
       // Handle top and bottom screen limits.
       next_ball_y = next_ball_y + extended_ball_y_direction;
       // If the ball touched the upper or lower screen bound, we flip its direction.
-      if ((next_ball_y == TOTAL_HEIGHT - BALL_SIDE_SIZE) | (next_ball_y == 0))
+      if ((next_ball_y == TOTAL_HEIGHT - BALL_SIDE_SIZE - BORDER_PIXEL_WIDTH) | (next_ball_y == BORDER_PIXEL_WIDTH))
         next_internal_ball_y_direction = -internal_ball_y_direction;
 
       // Handle X direction and paddle interactions.
@@ -187,7 +188,10 @@ module game_controller #(
       // Did the ball score a goal (We enter into the if here only if the ball reached one of the sides, but did not hit any paddles).
       if (((next_ball_x == $bits(next_ball_x)'(INITIAL_PADDLE_1_X + PADDLE_WIDTH)) || (next_ball_x == $bits(next_ball_x)'(INITIAL_PADDLE_2_X - BALL_SIDE_SIZE))) && ~ball_deflected) begin
         next_ball_x = INITIAL_BALL_X;
+        // Set the starting Y position and directions to "random" values.
         next_ball_y = INITIAL_BALL_Y - (BALL_OFFSET_RANGE / 2) + ball_offset_range_counter;
+        next_internal_ball_x_direction = ball_offset_range_counter[0];
+        next_internal_ball_y_direction = ball_offset_range_counter[1];
       end
     end
   end

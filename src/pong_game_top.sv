@@ -84,7 +84,8 @@ module pong_game_top #(
       .PADDLE_HEIGHT(PADDLE_HEIGHT),
       .PADDLE_WIDTH(PADDLE_WIDTH),
       .BALL_SIDE_SIZE(BALL_SIDE_SIZE),
-      .BALL_OFFSET_RANGE(BALL_OFFSET_RANGE)
+      .BALL_OFFSET_RANGE(BALL_OFFSET_RANGE),
+      .BORDER_PIXEL_WIDTH(BORDER_PIXEL_WIDTH)
   ) game_controller_inst (
       .clk(clk_10_KHz),
       .rst(rst),
