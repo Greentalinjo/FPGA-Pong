@@ -48,7 +48,7 @@ The graphics driver module generates the VGA-compatible video signals (hsync, vs
 It samples the current positions of these elements and uses internal horizontal and vertical counters to track the pixel being drawn. Based on these coordinates, it determines whether the current pixel is part of a paddle or ball and outputs the appropriate RGB color (white) or black background.  
 The module follows standard VGA timing conventions and synchronizes the visual updates with the VGA refresh cycle.
 
-## 🛠️ Target Hardware and Setup Requirements
+## Target Hardware and Setup Requirements
 
 This project was developed on the IceSugar v1.5 FPGA development board. To run the project successfully on this board, a few additional hardware components are required for input and video output functionality.  
 You will need: 
