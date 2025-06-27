@@ -11,7 +11,8 @@ module pong_game_top #(
     parameter int PADDLE_DISTANCE_FROM_EDGE                 = PADDLE_DISTANCE_FROM_EDGE,
     parameter int PADDLE_HEIGHT                             = PADDLE_HEIGHT,
     parameter int PADDLE_WIDTH                              = PADDLE_WIDTH,
-    parameter int BALL_SIDE_SIZE                            = BALL_SIDE_SIZE
+    parameter int BALL_SIDE_SIZE                            = BALL_SIDE_SIZE,
+    parameter int BALL_OFFSET_RANGE                         = BALL_OFFSET_RANGE
 ) (
     input logic rst,
 
@@ -81,7 +82,8 @@ module pong_game_top #(
       .TOTAL_HEIGHT(TOTAL_HEIGHT),
       .PADDLE_HEIGHT(PADDLE_HEIGHT),
       .PADDLE_WIDTH(PADDLE_WIDTH),
-      .BALL_SIDE_SIZE(BALL_SIDE_SIZE)
+      .BALL_SIDE_SIZE(BALL_SIDE_SIZE),
+      .BALL_OFFSET_RANGE(BALL_OFFSET_RANGE)
   ) game_controller_inst (
       .clk(clk_10_KHz),
       .rst(rst),

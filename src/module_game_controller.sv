@@ -10,7 +10,8 @@ module game_controller #(
     parameter int TOTAL_HEIGHT                  ,
     parameter int PADDLE_HEIGHT                 ,
     parameter int PADDLE_WIDTH                  ,
-    parameter int BALL_SIDE_SIZE                
+    parameter int BALL_SIDE_SIZE                ,
+    parameter int BALL_OFFSET_RANGE             
 ) (
     input logic clk,
     input logic rst,
@@ -29,6 +30,7 @@ module game_controller #(
 
   localparam int HEIGHT_COUNTER_SIZE = $clog2(TOTAL_HEIGHT + 1);
   localparam int WIDTH_COUNTER_SIZE = $clog2(TOTAL_WIDTH + 1);
+  localparam int BALL_OFFSET_RANGE_COUNTER_SIZE = $clog2(BALL_OFFSET_RANGE + 1);
   localparam int BALL_POSITION_CHANGE_COUNTER_SIZE = $clog2(POSITION_CHANGE_FREQ_IN_CLOCKS + 1);
 
   // This is our internal logic's paddle heights.
@@ -54,6 +56,8 @@ module game_controller #(
   logic signed [1:0] internal_ball_y_direction;
   logic signed [1:0] next_internal_ball_y_direction;
   logic signed [1:0] next_internal_ball_x_direction;
+
+  logic [BALL_OFFSET_RANGE_COUNTER_SIZE - 1:0] ball_offset_range_counter;
 
   logic [BALL_POSITION_CHANGE_COUNTER_SIZE-1:0] ball_position_change_counter;
   logic [BALL_POSITION_CHANGE_COUNTER_SIZE-1:0] next_ball_position_change_counter;
@@ -183,10 +187,18 @@ module game_controller #(
       // Did the ball score a goal (We enter into the if here only if the ball reached one of the sides, but did not hit any paddles).
       if (((next_ball_x == $bits(next_ball_x)'(INITIAL_PADDLE_1_X + PADDLE_WIDTH)) || (next_ball_x == $bits(next_ball_x)'(INITIAL_PADDLE_2_X - BALL_SIDE_SIZE))) && ~ball_deflected) begin
         next_ball_x = INITIAL_BALL_X;
-        next_ball_y = INITIAL_BALL_Y;
+        next_ball_y = INITIAL_BALL_Y - (BALL_OFFSET_RANGE / 2) + ball_offset_range_counter;
       end
     end
   end
+
+  // Ball Y position on goal offset counter.
+  always_ff @(posedge clk or negedge rst)
+    if (~rst) begin
+      ball_offset_range_counter <= '0;
+    end else begin
+      ball_offset_range_counter <= (ball_offset_range_counter == BALL_OFFSET_RANGE) ? 0 : ball_offset_range_counter + 1;
+    end
 
   assign extended_ball_y_direction = {
     {(HEIGHT_COUNTER_SIZE - 1) {internal_ball_y_direction[1]}}, internal_ball_y_direction

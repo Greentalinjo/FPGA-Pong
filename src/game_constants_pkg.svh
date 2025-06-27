@@ -9,3 +9,4 @@ parameter int POSITION_CHANGE_FREQ_IN_CLOCKS                      = (GAME_CONTRO
 parameter int DEBOUNCE_WIDTH_IN_CLOCKS                            = GAME_CONTROLLER_CLOCK_RATE * BUTTON_BOUNCE_DURATION_IN_SECONDS;
 parameter int PADDLE_DISTANCE_FROM_EDGE                           = 40;
 parameter int BALL_SIDE_SIZE                                      = 24;
+parameter int BALL_OFFSET_RANGE                                   = 100;
