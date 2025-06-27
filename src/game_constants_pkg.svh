@@ -10,3 +10,5 @@ parameter int DEBOUNCE_WIDTH_IN_CLOCKS                            = GAME_CONTROL
 parameter int PADDLE_DISTANCE_FROM_EDGE                           = 40;
 parameter int BALL_SIDE_SIZE                                      = 24;
 parameter int BALL_OFFSET_RANGE                                   = 100;
+parameter int BORDER_PIXEL_WIDTH                                  = 3;
+

@@ -8,7 +8,8 @@ module graphics_driver #(
     parameter int INITIAL_BALL_Y,
     parameter int PADDLE_WIDTH,
     parameter int PADDLE_HEIGHT,
-    parameter int BALL_SIDE_SIZE
+    parameter int BALL_SIDE_SIZE,
+    parameter int BORDER_PIXEL_WIDTH
 ) (
     input clk,  // This is a proper ~25.172 MHz clock.
     input rst,
@@ -122,15 +123,22 @@ module graphics_driver #(
   // Pixel color logic.
   always_comb begin
     {red, green, blue} = 3'b000;
-    // If x and y inside any of the shapes - display (R G B = 1) else display (R G B = 0).
+    // If x and y inside any of the shapes (or the display border) - display (R G B = 1) else display (R G B = 0).
     if ((x_change_counter < X_ACTIVE_IN_CLOCKS) && (y_change_counter < Y_ACTIVE_IN_LINES)) begin
+      // Left paddle.
       if ((x_change_counter >= INITIAL_PADDLE_1_X) && (x_change_counter < INITIAL_PADDLE_1_X + PADDLE_WIDTH) && (y_change_counter >= sampled_paddle_1_pos) && (y_change_counter < sampled_paddle_1_pos + PADDLE_HEIGHT)) begin
         {red, green, blue} = 3'b111;
       end
+      // Right paddle.
       if ((x_change_counter >= INITIAL_PADDLE_2_X) && (x_change_counter < INITIAL_PADDLE_2_X + PADDLE_WIDTH) && (y_change_counter >= sampled_paddle_2_pos) && (y_change_counter < sampled_paddle_2_pos + PADDLE_HEIGHT)) begin
         {red, green, blue} = 3'b111;
       end
+      // Ball.
       if ((x_change_counter >= sampled_ball_pos_x) && (x_change_counter < sampled_ball_pos_x + BALL_SIDE_SIZE) && (y_change_counter >= sampled_ball_pos_y) && (y_change_counter < sampled_ball_pos_y + BALL_SIDE_SIZE)) begin
+        {red, green, blue} = 3'b111;
+      end
+      // Border.
+      if ((x_change_counter < BORDER_PIXEL_WIDTH) || (x_change_counter >= X_ACTIVE_IN_CLOCKS - BORDER_PIXEL_WIDTH) || (y_change_counter < BORDER_PIXEL_WIDTH) || (y_change_counter >= Y_ACTIVE_IN_LINES - BORDER_PIXEL_WIDTH)) begin
         {red, green, blue} = 3'b111;
       end
     end

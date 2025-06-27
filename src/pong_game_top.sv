@@ -12,7 +12,8 @@ module pong_game_top #(
     parameter int PADDLE_HEIGHT                             = PADDLE_HEIGHT,
     parameter int PADDLE_WIDTH                              = PADDLE_WIDTH,
     parameter int BALL_SIDE_SIZE                            = BALL_SIDE_SIZE,
-    parameter int BALL_OFFSET_RANGE                         = BALL_OFFSET_RANGE
+    parameter int BALL_OFFSET_RANGE                         = BALL_OFFSET_RANGE,
+    parameter int BORDER_PIXEL_WIDTH                        = BORDER_PIXEL_WIDTH
 ) (
     input logic rst,
 
@@ -117,7 +118,8 @@ module pong_game_top #(
     .INITIAL_BALL_Y(INITIAL_BALL_Y),
     .PADDLE_WIDTH(PADDLE_WIDTH),
     .PADDLE_HEIGHT(PADDLE_HEIGHT),
-    .BALL_SIDE_SIZE(BALL_SIDE_SIZE)
+    .BALL_SIDE_SIZE(BALL_SIDE_SIZE),
+    .BORDER_PIXEL_WIDTH(BORDER_PIXEL_WIDTH)
   ) graphics_driver_inst (
     .clk(clk_25_125_MHz),
     .rst(rst),
