@@ -24,7 +24,13 @@ module pong_game_top #(
     output logic vsync,
     output logic red,
     output logic green,
-    output logic blue
+    output logic blue,
+
+    // Debugging signals - Currently used to indicate whether the reset is on or off.
+    output logic LED_R,
+    output logic LED_G,
+    output logic LED_B
+
 );
 
   localparam int HEIGHT_COUNTER_SIZE = $clog2(TOTAL_HEIGHT + 1);
@@ -124,6 +130,7 @@ module pong_game_top #(
     .blue_s(blue)
   );
 
+  // Packing and unpacking signals when passing them between clock domains.
   assign input_packed_for_handshake = {paddle_1_pos, paddle_2_pos, ball_pos_x, ball_pos_y};
   assign sync_paddle_1_pos = output_packed_for_handshake[$bits(paddle_1_pos) + 
                                                          $bits(paddle_2_pos) + 
@@ -135,5 +142,8 @@ module pong_game_top #(
   assign sync_ball_pos_x   = output_packed_for_handshake[$bits(ball_pos_x) + 
                                                          $bits(ball_pos_y) - 1 -: $bits(ball_pos_x)];
   assign sync_ball_pos_y   = output_packed_for_handshake[$bits(ball_pos_y) - 1 -: $bits(ball_pos_y)];
+
+  // assigning debug LEDs.
+  assign {LED_R, LED_G, LED_B} = ~rst ? 3'b111 : 3'b000; 
 
 endmodule

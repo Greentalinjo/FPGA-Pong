@@ -41,7 +41,7 @@ $(JSON_FILE): $(VERILOG_SOURCES) | $(BUILD_DIR)
 
 # Place & route
 $(ASC_FILE): $(JSON_FILE) $(PCF_FILE)
-	$(NEXTPNR) --$(DEVICE) --package $(PACKAGE) --pcf $(PCF_FILE) --json $(JSON_FILE) --asc $(ASC_FILE) --seed 598700686
+	$(NEXTPNR) --$(DEVICE) --package $(PACKAGE) --pcf $(PCF_FILE) --json $(JSON_FILE) --asc $(ASC_FILE) --seed 1796611893
 
 # Bitstream generation
 $(BIN_FILE): $(ASC_FILE)
