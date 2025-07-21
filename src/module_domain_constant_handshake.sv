@@ -27,7 +27,7 @@ module domain_constant_handshake #(
   //////////////////////////////////////////////////////
 
   always_ff @(posedge i_clk_a or negedge rst) begin : current_state_logic
-    if (!rst) begin
+    if (~rst) begin
       current_state <= IDLE;
     end else begin
       current_state <= next_state;
@@ -55,7 +55,7 @@ module domain_constant_handshake #(
   ////////////////////////////////////////////////////////////////////////
 
   always_ff @(posedge i_clk_a or negedge rst) begin : REQ_GENERATOR
-    if (!rst) begin
+    if (~rst) begin
       REQ       <= 'b0;
       data_sync <= 'b0;
     end else if ((!current_state)) begin
@@ -69,7 +69,7 @@ module domain_constant_handshake #(
   //////////////////////////////////////////////////////
 
   always_ff @(posedge i_clk_b or negedge rst) begin : REQ_Synchronizer
-    if (!rst) begin
+    if (~rst) begin
       req_sync_0 <= 1'b0;
       Sync_REQ   <= 1'b0;
     end else begin
@@ -85,7 +85,7 @@ module domain_constant_handshake #(
   //////////////////////////////////////////////////////
 
   always_ff @(posedge i_clk_a or negedge rst) begin : ACK_Synchronizer
-    if (!rst) begin
+    if (~rst) begin
       ack_sync_0 <= 1'b0;
       Sync_ACK   <= 1'b0;
     end else begin
@@ -99,7 +99,7 @@ module domain_constant_handshake #(
   ////////////////////////////////////////////////////////////////////////
 
   always_ff @(posedge i_clk_b or negedge rst) begin : ACK_AND_OUTPUT
-    if (!rst) begin
+    if (~rst) begin
       ACK    <= 'b0;
       o_data <= 'b0;
     end else if (Sync_REQ ^ ACK) begin

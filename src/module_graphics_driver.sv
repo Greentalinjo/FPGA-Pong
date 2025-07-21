@@ -26,8 +26,8 @@ module graphics_driver #(
 );
 
   localparam int X_ACTIVE_IN_CLOCKS  = 640;
-  localparam int X_FRONT_IN_CLOCKS   = 16;
-  localparam int X_PULSE_IN_CLOCKS   = 96;
+  localparam int X_FRONT_IN_CLOCKS   = 16 - 1;
+  localparam int X_PULSE_IN_CLOCKS   = 96 - 1;
   localparam int X_BACK_IN_CLOCKS    = 48;
   localparam int TOTAL_X             = X_ACTIVE_IN_CLOCKS + X_FRONT_IN_CLOCKS + X_PULSE_IN_CLOCKS + X_BACK_IN_CLOCKS;
 
