@@ -190,8 +190,8 @@ module game_controller #(
         next_ball_x = INITIAL_BALL_X;
         // Set the starting Y position and directions to "random" values.
         next_ball_y = INITIAL_BALL_Y - (BALL_OFFSET_RANGE / 2) + ball_offset_range_counter;
-        next_internal_ball_x_direction = ball_offset_range_counter[0];
-        next_internal_ball_y_direction = ball_offset_range_counter[1];
+        next_internal_ball_x_direction = (ball_offset_range_counter[0] ? internal_ball_x_direction : -internal_ball_x_direction);
+        next_internal_ball_y_direction = (ball_offset_range_counter[1] ? internal_ball_y_direction : -internal_ball_y_direction);
       end
     end
   end

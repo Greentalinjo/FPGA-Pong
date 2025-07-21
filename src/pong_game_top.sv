@@ -24,9 +24,9 @@ module pong_game_top #(
 
     output logic hsync,
     output logic vsync,
-    output logic red,
-    output logic green,
-    output logic blue,
+    output logic [3:0] red_o_arr,
+    output logic [3:0] green_o_arr,
+    output logic [3:0] blue_o_arr,
 
     // Debugging signals - Currently used to indicate whether the reset is on or off.
     output logic LED_R,
@@ -147,6 +147,11 @@ module pong_game_top #(
   assign sync_ball_pos_x   = output_packed_for_handshake[$bits(ball_pos_x) + 
                                                          $bits(ball_pos_y) - 1 -: $bits(ball_pos_x)];
   assign sync_ball_pos_y   = output_packed_for_handshake[$bits(ball_pos_y) - 1 -: $bits(ball_pos_y)];
+
+  // Expanding the VGA signal to the 4 digital signals before the DAC.
+  assign red_o_arr = (~red ? '0 : '1);
+  assign green_o_arr = (~green ? '0 : '1);
+  assign blue_o_arr = (~blue ? '0 : '1);
 
   // assigning debug LEDs.
   assign {LED_R, LED_G, LED_B} = ~rst ? 3'b111 : 3'b000; 

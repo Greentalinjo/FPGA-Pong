@@ -25,6 +25,7 @@ module graphics_driver #(
     output logic blue_s
 );
 
+  // The minus one is a patch that make the clock speed used (slightly below requirements) work on old and picky monitors.
   localparam int X_ACTIVE_IN_CLOCKS  = 640;
   localparam int X_FRONT_IN_CLOCKS   = 16 - 1;
   localparam int X_PULSE_IN_CLOCKS   = 96 - 1;
