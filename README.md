@@ -53,8 +53,7 @@ The module follows standard VGA timing conventions and synchronizes the visual u
 This project was developed on the IceSugar v1.5 FPGA development board. To run the project successfully on this board, a few additional hardware components are required for input and video output functionality.  
 You will need: 
 * 4 x push buttons for player control, each connected with a 10kΩ pull-down resistor to ensure stable input readings. 
-* For VGA output, the RGB lines from the FPGA must be adapted using 330Ω resistors to safely reduce the 3.3V output to approximately 0.61V, which is within the acceptable range for VGA signaling. 
-* Additionally, a VGA breakout connector is recommended for easy connection between the board and a standard VGA monitor.
+* For VGA output, a PMOD VGA adapter is used.
 
 ### IO Pin Assignments
 
